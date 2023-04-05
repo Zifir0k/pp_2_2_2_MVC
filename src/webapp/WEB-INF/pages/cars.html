@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cars</title>
+</head>
+<body>
+<div th:with="intList = ${ {1, 2, 3, 4, 5} }">
+  <div>
+    Enter
+    <a th:each="c : ${intList}" th:href="@{/cars(count=${c})}" th:text="|&nbsp;${c}&nbsp;|"/>
+    <a th:href="@{/cars}" th:text="All"/>
+  </div>
+</div>
+
+<div>
+  <div>
+    <div th:each="car : ${cars}" class="card mb-2 mr-2">
+      <div th:text="${car.getModel()}"/>
+      <ul>
+        <li th:text="|Color: ${car.getColor()}|"/>
+        <li th:text="|Series: ${car.getYear()}|"/>
+        <li th:text="|Price: ${#numbers.formatDecimal(car.getPrice(), 0, 'COMMA', 2, 'POINT')} rus.|"/>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
